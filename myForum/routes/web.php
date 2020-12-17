@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ReferenceController;
+use App\Http\Controllers\ThemeController;
+use App\Http\Resources\Reference as ReferenceResource;
+use App\Models\Reference;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +18,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
 });
+
+Route::get('/api/references/all', function () {
+    return new ReferenceResource(Reference::all());
+});
+
+Route::get('/api/references/one/{id?}', function ($id) {
+    return new ReferenceResource(Reference::find($id));
+});
+Route::get('/', 'App\Http\Controllers\HomeController@index');
+Route::Resource('opinions',OpinionController::class);
+Route::Resource('references',ReferenceController::class);
+Route::Resource('roles',RoleController::class);
+Route::Resource('states',StateController::class);
+Route::Resource('themes',ThemeController::class);

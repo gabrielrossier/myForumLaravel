@@ -14,6 +14,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->register(\KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class);
+        $this->app->register(\Orangehill\iseed\IseedServiceProvider::class);
+        $this->app->register(\Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class);
     }
 
     /**
