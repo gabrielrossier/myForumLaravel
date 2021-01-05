@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\TopicController;
 use App\Http\Resources\Reference as ReferenceResource;
 use App\Models\Reference;
-use Illuminate\Support\Facades\Route;
+use App\Models\Topic;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +21,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('homepage');
@@ -34,3 +45,5 @@ Route::Resource('references',ReferenceController::class);
 Route::Resource('roles',RoleController::class);
 Route::Resource('states',StateController::class);
 Route::Resource('themes',ThemeController::class);
+Route::Resource('topics', TopicController::class);
+
