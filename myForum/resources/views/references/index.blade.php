@@ -15,15 +15,18 @@
                 {{ $reference->description }}
                 <br/>
                 {{ $reference->url }}
-                <a class="btn btn-primary" href="{{ route('references.show',$reference->id) }}"><i class="fas fa-search-plus"></i>Détails</a>
+
 
 
 
             </div>
-            <div class="col-10 text-right">{{$reference->opinions->count()}}</div>
-            <hr/>
-        </div>
+            <div class="col-10 text-right">
+                {{$reference->opinions->count()}}
+                <a class="btn btn-primary" href="{{ route('references.show',$reference->id) }}"><i class="fas fa-search-plus"></i>Détails</a>
+            </div>
 
+        </div>
+        <hr/>
         @empty
             <div>Aucune</div>
     @endforelse
