@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Opinion;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class OpinionController extends Controller
 {
     /**
@@ -80,5 +80,21 @@ class OpinionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function newComment(Request $request)
+    {
+        $opinion = Opinion::find($request->input('opinionid'));
+
+        if($opinion != null)
+        {
+            $opinion->comments()->attach(Auth::user(),['comment' => $request->input('newcomm'),'points' => $request->input('points')]);
+            return redirect(route('topics.show',$opinion->topic))->with('message','Commentaire ajouté !');
+        }
+        else
+        {
+            return redirect(route('themes.index'))->with('message','Error : Opinion not found !');
+        }
+
     }
 }

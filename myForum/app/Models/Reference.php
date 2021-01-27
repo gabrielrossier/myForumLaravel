@@ -15,4 +15,5 @@ class Reference extends Model
         return $this->belongsToMany(Opinion::class);
     }
 
+
 }
